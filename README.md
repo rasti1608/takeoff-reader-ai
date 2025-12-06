@@ -45,17 +45,17 @@ Small-to-mid contractors—the guy with 10-50 employees doing residential and li
 │                      TAKEOFF PRO AI                             │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐          │
-│   │   ADDRESS   │   │  PDF/PLANS  │   │   PHOTOS    │          │
-│   │   LOOKUP    │   │   UPLOAD    │   │   UPLOAD    │          │
-│   └──────┬──────┘   └──────┬──────┘   └──────┬──────┘          │
+│   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐           │
+│   │   ADDRESS   │   │  PDF/PLANS  │   │   PHOTOS    │           │
+│   │   LOOKUP    │   │   UPLOAD    │   │   UPLOAD    │           │
+│   └──────┬──────┘   └──────┬──────┘   └──────┬──────┘           │
 │          │                 │                 │                  │
 │          ▼                 ▼                 ▼                  │
-│   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐          │
-│   │  Satellite  │   │  AI Vision  │   │  AI Vision  │          │
-│   │  Imagery    │   │  Blueprint  │   │  Photo      │          │
-│   │  Analysis   │   │  Analysis   │   │  Analysis   │          │
-│   └──────┬──────┘   └──────┬──────┘   └──────┬──────┘          │
+│   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐           │
+│   │  Satellite  │   │  AI Vision  │   │  AI Vision  │           │
+│   │  Imagery    │   │  Blueprint  │   │  Photo      │           │
+│   │  Analysis   │   │  Analysis   │   │  Analysis   │           │
+│   └──────┬──────┘   └──────┬──────┘   └──────┬──────┘           │
 │          │                 │                 │                  │
 │          └─────────────────┼─────────────────┘                  │
 │                            ▼                                    │
@@ -259,35 +259,35 @@ The AI finds pitch from:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  STEP 1: Start New Project                                  │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │  Project Name: Smith Residence Re-Roof              │   │
-│  │  Address: 123 Main St, Anytown, USA                 │   │
-│  │                                                     │   │
-│  │  Input Method:                                      │   │
-│  │  [Address Lookup] [Upload PDF] [Upload Photos]      │   │
-│  └─────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │  Project Name: Smith Residence Re-Roof              │    │
+│  │  Address: 123 Main St, Anytown, USA                 │    │
+│  │                                                     │    │
+│  │  Input Method:                                      │    │
+│  │  [Address Lookup] [Upload PDF] [Upload Photos]      │    │
+│  └─────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  STEP 2: AI Processing                                      │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │  ✓ Scale detected: 1/4" = 1'-0"                     │   │
-│  │  ✓ Roof plan found on page 4                        │   │
-│  │  ✓ Elevations found on pages 7-10                   │   │
-│  │  ✓ Pitch identified: 6:12 (main), 4:12 (porch)     │   │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │  ✓ Scale detected: 1/4" = 1'-0"                      │   │
+│  │  ✓ Roof plan found on page 4                         │   │
+│  │  ✓ Elevations found on pages 7-10                    │   │
+│  │  ✓ Pitch identified: 6:12 (main), 4:12 (porch)       │   │
 │  │  ⟳ Calculating areas...                             │   │
 │  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────┘
                               │
                               ▼
-┌─────────────────────────────────────────────────────────────┐
-│  STEP 3: Review & Adjust                                    │
+┌────────────────────────────────────────────────────────────┐
+│  STEP 3: Review & Adjust                                   │
 │  ┌─────────────────────────────────────────────────────┐   │
 │  │  ROOF SUMMARY                                       │   │
 │  │  ─────────────────────────────────────────────────  │   │
 │  │  Flat Area:        2,450 sq ft                      │   │
-│  │  Pitch-Adjusted:   2,739 sq ft (6:12 = 1.118×)     │   │
+│  │  Pitch-Adjusted:   2,739 sq ft (6:12 = 1.118×)      │   │
 │  │  Total Squares:    28.5 squares                     │   │
 │  │                                                     │   │
 │  │  [Edit] if something looks wrong                    │   │
@@ -297,12 +297,12 @@ The AI finds pitch from:
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  STEP 4: Download                                           │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │                                                     │   │
-│  │  [Download Excel]  [Download PDF Proposal]          │   │
-│  │                                                     │   │
-│  │  [Save to My Projects]  [Share Link]                │   │
-│  └─────────────────────────────────────────────────────┘   │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │                                                     │    │
+│  │  [Download Excel]  [Download PDF Proposal]          │    │
+│  │                                                     │    │
+│  │  [Save to My Projects]  [Share Link]                │    │
+│  └─────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -311,14 +311,14 @@ The AI finds pitch from:
 **No Scale Found:**
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  ⚠️  Scale Not Detected                                     │
+│  ⚠️  Scale Not Detected                                      │
 │                                                             │
 │  We couldn't find a scale notation in your PDF.             │
 │                                                             │
 │  Options:                                                   │
-│  1. Enter scale manually: [1/4" = 1'-0" ▼]                 │
-│  2. Enter a known dimension for calibration                │
-│  3. Request clarification from architect                   │
+│  1. Enter scale manually: [1/4" = 1'-0" ▼]                  │
+│  2. Enter a known dimension for calibration                 │
+│  3. Request clarification from architect                    │
 │                                                             │
 │  [Continue with Manual Entry]  [Upload Different PDF]       │
 └─────────────────────────────────────────────────────────────┘
@@ -327,15 +327,15 @@ The AI finds pitch from:
 **No Pitch Found:**
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  ⚠️  Roof Pitch Not Detected                                │
+│  ⚠️  Roof Pitch Not Detected                                 │
 │                                                             │
 │  We couldn't determine the roof pitch from elevations.      │
 │                                                             │
 │  Common pitches:                                            │
-│  ○ 4:12 (gentle slope)                                     │
-│  ○ 6:12 (standard residential)                             │
-│  ○ 8:12 (steeper)                                          │
-│  ○ Other: [___:12]                                         │
+│  ○ 4:12 (gentle slope)                                      │
+│  ○ 6:12 (standard residential)                              │
+│  ○ 8:12 (steeper)                                           │
+│  ○ Other: [___:12]                                          │
 │                                                             │
 │  [Apply Selected Pitch]                                     │
 └─────────────────────────────────────────────────────────────┘
@@ -398,7 +398,7 @@ This mirrors exactly what a human estimator would do—if the information isn't 
 
 | Feature | EagleView | TakeOff Pro AI |
 |---------|-----------|----------------|
-| Pricing | Per report | Flat monthly |
+| Pricing | Per report | Flat monthly  |
 | PDF Support | ❌ | ✅ |
 | New Construction | ❌ | ✅ |
 | Turnaround | Hours | Minutes |
