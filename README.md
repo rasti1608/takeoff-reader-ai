@@ -1,4 +1,6 @@
-# TakeOff Pro AI
+# ![TakeoffReader AI](https://raw.githubusercontent.com/nonamedogai/TakeoffReaderAI/main/TakeoffReaderAI_logo.png)
+
+# TakeoffReader AI
 ## Intelligent Construction Estimating Platform
 ### Product Vision Document
 
@@ -6,55 +8,40 @@
 
 ## Executive Summary
 
-**TakeOff Pro AI** is an AI-powered construction estimating platform that automates material takeoffs from PDF blueprints, satellite imagery, and property photos. Built for roofing, siding, stucco, masonry, and exterior contractors who are tired of manual measurements and overpriced per-report services.
+**TakeoffReader AI** is an AI-powered construction estimating platform that automates material takeoffs from aerial imagery, PDF blueprints, and on-site LiDAR scans. Built for roofing, siding, stucco, masonry, and exterior contractors who are tired of manual measurements and overpriced per-report services.
 
-**The Problem:** Contractors waste hours with rulers on printed blueprints, or pay $15-87 per property for satellite measurement services like EagleView. Small-to-mid contractors (5-50 employees) are underserved—enterprise tools are too expensive and complex, while manual methods eat into profit margins.
+**The Problem:** Contractors waste hours with rulers on printed blueprints, or pay $15-87 per property for aerial measurement services like EagleView. Small-to-mid contractors (5-50 employees) are underserved—enterprise tools are too expensive and complex, while manual methods eat into profit margins.
 
-**The Solution:** Upload a PDF or enter an address. AI does the rest. Get accurate material quantities, pitch-adjusted calculations, and professional proposals in minutes—not hours. Flat monthly pricing means you can bid more jobs without per-report costs eating your margins.
-
----
-
-## The Market Opportunity
-
-### Current Landscape
-
-| Competitor | Approach | Pricing | Limitations |
-|------------|----------|---------|-------------|
-| **EagleView** | Satellite/aerial imagery | $15-87 per report | Per-report cost adds up fast. No PDF support. New construction not available. |
-| **Beam AI** | PDF blueprint automation | Enterprise pricing | 24-72 hour turnaround. QA overhead. Targets large contractors. |
-| **HOVER** | Smartphone photos | Subscription | Requires site visit. Limited to existing structures. |
-| **PlanSwift/Bluebeam** | Manual digital tracing | $1,500+ license | Still manual. Steep learning curve. |
-
-### The Gap
-
-Small-to-mid contractors—the guy with 10-50 employees doing residential and light commercial—have no good option:
-- EagleView at $30/report × 30 jobs/month = $900/month just for measurements
-- Enterprise AI tools require demos, contracts, minimums
-- Manual takeoffs take 2-4 hours each
-
-**Our Target:** The contractor who does 20-100 jobs per month and needs fast, accurate takeoffs without enterprise complexity or per-report gouging.
+**The Solution:** Enter an address, upload a PDF, or scan with your phone. AI does the rest. Get accurate material quantities, pitch-adjusted calculations, and professional proposals in minutes—not hours. Flat monthly pricing means you can bid more jobs without per-report costs eating your margins.
 
 ---
 
-## Product Vision
+## Three Products, One Platform
 
-### Three Input Methods, One Platform
+TakeoffReader AI provides **complete exterior takeoff coverage** through three specialized products:
+
+| Product | Input Source | Best For |
+|---------|--------------|----------|
+| **SkyReader** | Aerial/Satellite Imagery | Existing buildings, quick estimates without site visit |
+| **PlanReader** | PDF Blueprints | New construction, renovations with drawings |
+| **SiteReader** | iPhone LiDAR Scanning | Existing buildings without drawings, on-site capture |
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                      TAKEOFF PRO AI                             │
+│                    TAKEOFFREADER AI                             │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐           │
-│   │   ADDRESS   │   │  PDF/PLANS  │   │   PHOTOS    │           │
-│   │   LOOKUP    │   │   UPLOAD    │   │   UPLOAD    │           │
+│   │  SKYREADER  │   │ PLANREADER  │   │ SITEREADER  │           │
+│   │   Address   │   │  PDF/Plans  │   │   iPhone    │           │
+│   │   Lookup    │   │   Upload    │   │   LiDAR     │           │
 │   └──────┬──────┘   └──────┬──────┘   └──────┬──────┘           │
 │          │                 │                 │                  │
 │          ▼                 ▼                 ▼                  │
 │   ┌─────────────┐   ┌─────────────┐   ┌─────────────┐           │
-│   │  Satellite  │   │  AI Vision  │   │  AI Vision  │           │
-│   │  Imagery    │   │  Blueprint  │   │  Photo      │           │
-│   │  Analysis   │   │  Analysis   │   │  Analysis   │           │
+│   │  EagleView  │   │  AI Vision  │   │   ARKit     │           │
+│   │  Aerial     │   │  Blueprint  │   │   3D Scan   │           │
+│   │  Imagery    │   │  Analysis   │   │   Analysis  │           │
 │   └──────┬──────┘   └──────┬──────┘   └──────┬──────┘           │
 │          │                 │                 │                  │
 │          └─────────────────┼─────────────────┘                  │
@@ -79,269 +66,117 @@ Small-to-mid contractors—the guy with 10-50 employees doing residential and li
 
 ---
 
-## Input Method Details
+## Product Details
 
-### 1. Address Lookup (Satellite/Aerial)
+### SkyReader — Aerial Takeoffs
 
 **Use Case:** Existing properties where you need quick measurements without a site visit.
 
 **How It Works:**
 - Enter property address
-- System pulls satellite/aerial imagery
-- AI identifies roof planes, edges, features
-- Calculates areas with pitch estimation (from shadow analysis or standard assumptions)
-- Outputs material quantities
+- System pulls aerial imagery via EagleView API
+- Returns roof measurements, pitch, facets, waste factors
+- Wall measurements available (windows, doors, elevations)
+- Calculates full material quantities
 
 **Best For:**
 - Residential re-roofing
+- Siding replacement estimates
 - Insurance estimates
 - Quick preliminary bids
 - Storm damage assessment
 
-**Limitations:**
-- Cannot see under tree cover
-- Pitch estimation less precise than blueprints
-- New construction not available (no imagery yet)
+**Data Available:**
+- Roof: Total area, pitch breakdown, facets, ridges, hips, valleys, eaves, rakes
+- Walls: Wall area by elevation, window/door deductions
+- Gutters: Eave measurements, downspout count
 
-### 2. PDF Blueprint Upload
+---
+
+### PlanReader — Blueprint Takeoffs
 
 **Use Case:** New construction or renovation projects where architectural drawings are available.
 
 **How It Works:**
-- Upload PDF blueprint set (can be 1 page or 100+ pages)
-- AI scans all pages to find:
-  - **Scale notation** (1/4" = 1'-0", 1:50, etc.)
-  - **Roof plan** (top-down view showing all planes)
-  - **Elevations** (side views showing pitch)
-  - **Details** (flashing, drainage, penetrations)
-- AI measures dimensions using the detected scale
-- Pitch extracted from elevation drawings or explicit notation
+- Upload PDF blueprint set (1 to 500+ pages)
+- AI scans all pages to identify relevant sheets
+- Detects scale, pitch, dimensions automatically
+- Extracts measurements using detected scale
 - Applies pitch multiplier to convert flat area to actual surface area
-- Calculates all material quantities
-
-**Scale Detection:**
-The AI looks for scale in common locations:
-- Title block (bottom right of each sheet)
-- Near the drawing itself
-- Cover sheet / index
-- Explicit notation like "SCALE: 1/4" = 1'-0""
-
-If scale cannot be found, user is prompted to:
-- Manually enter the scale, OR
-- Provide a known dimension for calibration
-
-**Pitch Calculation:**
-Pitch (roof slope) is critical for accurate material calculation. A 12:12 pitch roof has 41% more surface area than the same footprint measured flat.
-
-The AI finds pitch from:
-- Explicit notation on plans (e.g., "6:12 PITCH")
-- Roof pitch symbols (triangle with rise/run)
-- Calculated from elevation drawings (rise ÷ run)
-- Section details showing rafter angles
-
-| Pitch | Multiplier | Common Use |
-|-------|------------|------------|
-| Flat (0:12) | 1.000 | Commercial flat roofs |
-| 2:12 | 1.014 | Low slope |
-| 4:12 | 1.054 | Standard residential |
-| 6:12 | 1.118 | Common residential |
-| 8:12 | 1.202 | Steeper residential |
-| 10:12 | 1.302 | Steep |
-| 12:12 | 1.414 | Very steep |
+- **4-Way Validation System** ensures <2% variance
 
 **Best For:**
 - New construction
 - Major renovations
 - Commercial projects
-- Accurate bidding
+- Accurate competitive bidding
 
-### 3. Photo Upload (Future Phase)
+**Key Feature — Accuracy Validation System:**
+- Phase 1: AI flags estimated vs. verified dimensions
+- Phase 2: User confirms uncertain values (30-second interaction)
+- Phase 3: 4 parallel calculations validate consistency
+- Result: <2% variance, guaranteed
 
-**Use Case:** Existing structures where you have site photos but no drawings.
+---
+
+### SiteReader — LiDAR Takeoffs
+
+**Use Case:** Existing structures where you have no drawings and need accurate measurements.
 
 **How It Works:**
-- Upload multiple photos of the structure
-- AI analyzes geometry from multiple angles
-- Estimates dimensions and pitch
-- User can add reference measurements for calibration
+- Open companion iOS app on iPhone 12 Pro or newer
+- Walk around building exterior
+- LiDAR captures 3D point cloud
+- Upload to TakeoffReader for AI processing
+- Receive complete exterior takeoff
 
 **Best For:**
-- Siding replacement
-- Stucco/stone veneer
-- Smaller residential jobs
-- When blueprints don't exist
+- Older buildings without blueprints
+- Additions/renovations to existing structures
+- Siding and stucco replacement
+- Quick on-site estimates
+
+**Requirements:**
+- iPhone 12 Pro or newer (LiDAR equipped)
+- iOS companion app (free)
+- TakeoffReader subscription
+
+---
+
+## The Market Opportunity
+
+### Current Landscape
+
+| Competitor | Approach | Pricing | Limitations |
+|------------|----------|---------|-------------|
+| **EagleView** | Aerial imagery | $15-87 per report | Per-report cost adds up. No PDF support. |
+| **Beam AI** | PDF automation | Enterprise pricing | 24-72 hour turnaround. QA overhead. |
+| **HOVER** | Smartphone photos | Subscription | Requires site visit. Limited accuracy. |
+| **PlanSwift/Bluebeam** | Manual digital tracing | $1,500+ license | Still manual. Steep learning curve. |
+
+### The Gap
+
+Small-to-mid contractors—the guy with 10-50 employees doing residential and light commercial—have no good option:
+- EagleView at $30/report × 30 jobs/month = $900/month just for measurements
+- Enterprise AI tools require demos, contracts, minimums
+- Manual takeoffs take 2-4 hours each
+
+**TakeoffReader AI Target:** The contractor who does 20-100 jobs per month and needs fast, accurate takeoffs without enterprise complexity or per-report gouging.
 
 ---
 
 ## Supported Trades
 
-### Phase 1: Roofing (Launch)
+### All Exterior Building Trades
 
-**Materials Calculated:**
-- Shingles / squares (with waste factor)
-- Underlayment / felt (with overlap)
-- Drip edge (linear feet)
-- Starter strip
-- Ridge cap / hip cap
-- Flashing (step, counter, valley)
-- Ice & water shield
-- Vents (ridge, box, turbine)
-- Pipe boots / penetration flashings
-- Nails / fasteners
-
-**Special Calculations:**
-- Pitch-adjusted square footage
-- Valley lengths
-- Hip lengths
-- Ridge lengths
-- Rake/gable lengths
-- Eave lengths
-- Headwall/sidewall flashings
-
-### Phase 2: Siding & Exterior
-
-**Siding Types:**
-- Vinyl siding
-- Fiber cement (HardiePlank)
-- Wood siding
-- Metal panels
-- Composite
-
-**Materials Calculated:**
-- Siding squares
-- J-channel
-- Starter strip
-- Corner posts (inside/outside)
-- Window/door trim
-- Soffit
-- Fascia
-- Gutters & downspouts
-
-**Deductions:**
-- Windows (automated detection)
-- Doors (automated detection)
-- Other openings
-
-### Phase 3: Masonry & Stone
-
-**Types:**
-- Brick veneer
-- Stone veneer
-- Thin brick
-- Stucco/EIFS
-- Concrete block
-
-**Materials Calculated:**
-- Square footage of coverage
-- Mortar/adhesive quantities
-- Lath/scratch coat materials
-- Corner pieces
-- Trim pieces
-- Weep screed
-- Control joints
-
-### Future Phases
-
-- Concrete flatwork
-- Framing lumber
-- Insulation
-- Drywall/sheetrock
-- Flooring
-- Painting
-- Fencing
-
----
-
-## User Experience
-
-### Simple Workflow
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  STEP 1: Start New Project                                  │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │  Project Name: Smith Residence Re-Roof              │    │
-│  │  Address: 123 Main St, Anytown, USA                 │    │
-│  │                                                     │    │
-│  │  Input Method:                                      │    │
-│  │  [Address Lookup] [Upload PDF] [Upload Photos]      │    │
-│  └─────────────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  STEP 2: AI Processing                                      │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │  ✓ Scale detected: 1/4" = 1'-0"                      │   │
-│  │  ✓ Roof plan found on page 4                         │   │
-│  │  ✓ Elevations found on pages 7-10                    │   │
-│  │  ✓ Pitch identified: 6:12 (main), 4:12 (porch)       │   │
-│  │  ⟳ Calculating areas...                             │   │
-│  └─────────────────────────────────────────────────────┘   │
-└────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌────────────────────────────────────────────────────────────┐
-│  STEP 3: Review & Adjust                                   │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │  ROOF SUMMARY                                       │   │
-│  │  ─────────────────────────────────────────────────  │   │
-│  │  Flat Area:        2,450 sq ft                      │   │
-│  │  Pitch-Adjusted:   2,739 sq ft (6:12 = 1.118×)      │   │
-│  │  Total Squares:    28.5 squares                     │   │
-│  │                                                     │   │
-│  │  [Edit] if something looks wrong                    │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│  STEP 4: Download                                           │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │                                                     │    │
-│  │  [Download Excel]  [Download PDF Proposal]          │    │
-│  │                                                     │    │
-│  │  [Save to My Projects]  [Share Link]                │    │
-│  └─────────────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### What If Something Is Missing?
-
-**No Scale Found:**
-```
-┌─────────────────────────────────────────────────────────────┐
-│  ⚠️  Scale Not Detected                                      │
-│                                                             │
-│  We couldn't find a scale notation in your PDF.             │
-│                                                             │
-│  Options:                                                   │
-│  1. Enter scale manually: [1/4" = 1'-0" ▼]                  │
-│  2. Enter a known dimension for calibration                 │
-│  3. Request clarification from architect                    │
-│                                                             │
-│  [Continue with Manual Entry]  [Upload Different PDF]       │
-└─────────────────────────────────────────────────────────────┘
-```
-
-**No Pitch Found:**
-```
-┌─────────────────────────────────────────────────────────────┐
-│  ⚠️  Roof Pitch Not Detected                                 │
-│                                                             │
-│  We couldn't determine the roof pitch from elevations.      │
-│                                                             │
-│  Common pitches:                                            │
-│  ○ 4:12 (gentle slope)                                      │
-│  ○ 6:12 (standard residential)                              │
-│  ○ 8:12 (steeper)                                           │
-│  ○ Other: [___:12]                                          │
-│                                                             │
-│  [Apply Selected Pitch]                                     │
-└─────────────────────────────────────────────────────────────┘
-```
-
-This mirrors exactly what a human estimator would do—if the information isn't on the plans, you either make an assumption, measure on site, or call the architect.
+| Trade Category | Specific Types |
+|----------------|----------------|
+| **Roofing** | Shingles, metal, tile, flat/membrane, slate |
+| **Siding** | Vinyl, fiber cement (Hardie), wood, metal panels, composite |
+| **Masonry** | Brick veneer, stone veneer, thin brick, concrete block |
+| **Stucco/EIFS** | Traditional stucco, synthetic stucco, EIFS systems |
+| **Concrete** | Flatwork, driveways, sidewalks, patios |
+| **Gutters** | Seamless, sectional, gutter guards |
 
 ---
 
@@ -351,8 +186,8 @@ This mirrors exactly what a human estimator would do—if the information isn't 
 **For:** Solo contractors, small operations
 
 - 10 takeoffs per month
-- PDF uploads only
-- Roofing trade only
+- PlanReader (PDF) only
+- Roofing + Siding trades
 - Excel export
 - Email support
 
@@ -360,10 +195,11 @@ This mirrors exactly what a human estimator would do—if the information isn't 
 **For:** Growing contractors, small teams
 
 - 50 takeoffs per month
-- PDF + Address lookup
-- Roofing + Siding
+- PlanReader + SkyReader
+- All exterior trades
 - Excel + PDF proposal export
 - Project history & storage
+- Dual-AI verification
 - Priority support
 - 2 team seats
 
@@ -371,24 +207,14 @@ This mirrors exactly what a human estimator would do—if the information isn't 
 **For:** Established contractors, multiple estimators
 
 - Unlimited takeoffs
-- All input methods (PDF, Address, Photos)
+- All products (SkyReader, PlanReader, SiteReader)
 - All trades
 - All export formats
 - Custom proposal templates
-- Manufacturer API pricing integration
+- Manufacturer pricing integration
 - Unlimited team seats
 - Dedicated support
-- API access for integrations
-
-### Enterprise - Custom
-**For:** Large contractors, franchises
-
-- Everything in Business
-- Custom integrations
-- White-label options
-- Volume discounts
-- SLA guarantees
-- On-boarding & training
+- API access
 
 ---
 
@@ -396,138 +222,95 @@ This mirrors exactly what a human estimator would do—if the information isn't 
 
 ### vs. EagleView ($15-87/report)
 
-| Feature | EagleView | TakeOff Pro AI |
-|---------|-----------|----------------|
-| Pricing | Per report | Flat monthly  |
-| PDF Support | ❌ | ✅ |
-| New Construction | ❌ | ✅ |
+| Feature | EagleView | TakeoffReader AI |
+|---------|-----------|------------------|
+| Pricing | Per report | Flat monthly |
+| PDF Support | ❌ | ✅ PlanReader |
+| New Construction | ❌ | ✅ PlanReader |
 | Turnaround | Hours | Minutes |
-| Trades | Roofing/Siding | Expanding |
-| Team Access | Extra cost | Included |
+| Trades | Roofing/Siding | All Exterior |
+| On-site capture | ❌ | ✅ SiteReader |
 
 **At 30 jobs/month:**
 - EagleView: $450-900/month
-- TakeOff Pro: $149/month (Professional)
-
-### vs. Beam AI (Enterprise)
-
-| Feature | Beam AI | TakeOff Pro AI |
-|---------|---------|----------------|
-| Target | Large contractors | All sizes |
-| Turnaround | 24-72 hours | Minutes |
-| Pricing | Per project | Flat monthly |
-| Self-service | No (requires QA team) | Yes |
-| Sales process | Demo required | Sign up instantly |
+- TakeoffReader AI: $149/month (Professional)
 
 ### vs. Manual (Ruler & Paper)
 
-| Factor | Manual | TakeOff Pro AI |
-|--------|--------|----------------|
+| Factor | Manual | TakeoffReader AI |
+|--------|--------|------------------|
 | Time per takeoff | 2-4 hours | 5-10 minutes |
-| Accuracy | Human error prone | Consistent |
+| Accuracy | Human error prone | <2% variance (validated) |
 | Scaling | Hire more estimators | Same team, more bids |
 | Storage | Filing cabinets | Cloud searchable |
 
 ---
 
-## Technical Approach
+## Technical Architecture
 
-### AI Vision Processing
+### Accuracy Validation System (PlanReader)
 
-Modern AI vision models can:
-- Read text from blueprints (OCR)
-- Understand drawing conventions
-- Measure scaled dimensions
-- Identify architectural symbols
-- Recognize roof planes, walls, openings
+The core differentiator. While competitors run single AI calculations or require human QA review, TakeoffReader uses:
 
-The same technology that lets AI describe a photograph can read a blueprint and extract measurements—it just needs the right instructions.
+1. **Confidence Tracking** — AI explicitly flags estimated vs. verified dimensions
+2. **User Confirmation** — Quick 30-second review of uncertain values
+3. **4-Way Parallel Validation** — Four independent calculations must agree within 2%
+4. **Statistical Verification** — Results averaged and validated before delivery
 
-### Accuracy Commitment
+**Proven Results:**
+- Testing showed 79% variance with uncontrolled dimensions
+- With locked dimensions: <1% variance achieved
+- Methodology documented and proprietary
 
-- **95%+ accuracy target** on standard drawings
-- Clear indication when confidence is lower
-- Always allow manual override
-- Feedback loop to improve over time
+### AI Engine
 
-### When AI Can't Help
+- **Primary:** Claude Opus 4.5 (only model that can visually measure from PDFs)
+- **Verification:** Claude Sonnet 4.5 for dual-AI cross-check
+- **Aerial Data:** EagleView API integration
 
-We're honest about limitations:
-- Severely degraded or hand-drawn plans may need manual assist
-- Unusual scales require user input
-- Complex multi-building commercial may need enterprise support
+---
 
-But if a competent human estimator could read the plans, so can our AI.
+## Domains
+
+- **Primary:** takeoffreader.com
+- **Alternative:** takeoffreader.ai
 
 ---
 
 ## Roadmap
 
-### Phase 1: Foundation (Months 1-3)
+### Phase 1: PlanReader MVP (Current)
 - ✅ PDF blueprint processing
-- ✅ Roofing takeoffs
-- ✅ Excel export
-- ✅ User accounts & project storage
-- ✅ Basic proposal PDF
+- ✅ Roofing + Siding takeoffs
+- ✅ 4-Way Validation System
+- ✅ Dual-AI verification
+- ⬜ User accounts & billing
+- ⬜ Report generation
 
-### Phase 2: Expand Inputs (Months 4-6)
-- Address/satellite lookup integration
-- Photo upload processing
-- Siding trade support
-- Improved proposals with branding
+### Phase 2: SkyReader
+- ⬜ EagleView API integration (pending pricing confirmation)
+- ⬜ Roof + Walls + Gutters from aerial
+- ⬜ Address lookup workflow
 
-### Phase 3: Scale (Months 7-12)
-- Additional trades (stucco, masonry, stone)
-- Manufacturer pricing APIs
-- Team collaboration features
-- Mobile app
-- CRM integrations
+### Phase 3: SiteReader
+- ⬜ iOS companion app
+- ⬜ LiDAR capture workflow
+- ⬜ 3D scan processing pipeline
 
-### Phase 4: Intelligence (Year 2+)
-- Historical pricing analytics
-- Win rate optimization
-- Material cost tracking
-- Supplier integrations
-- Automated ordering
-
----
-
-## Why This Will Work
-
-1. **The Technology Exists** - AI vision models are production-ready. Companies like EagleView and Beam AI prove the concept works. We're not inventing new AI—we're applying it better.
-
-2. **The Market Is Underserved** - Small-to-mid contractors are stuck between expensive per-report services and tedious manual work. They need affordable automation.
-
-3. **Simple Beats Complex** - Contractors want to upload and download, not learn complex software. We win by being dead simple.
-
-4. **Flat Pricing Changes Behavior** - When there's no per-report cost, contractors bid more jobs. More bids = more wins = more subscription value.
-
-5. **We Understand The Trade** - This isn't built by tech people guessing what contractors need. It's built with actual roofers, siders, and masons who know what a pitch multiplier is.
-
----
-
-## The Ask
-
-We're looking for:
-
-1. **Real PDF blueprints** from completed jobs where you know the correct takeoff
-2. **Your methodology** - how you read plans, what you look for, your calculations
-3. **Feedback** on pricing, features, workflow
-4. **Beta testers** when we launch
-
-In return, you'll get:
-- Input on exactly how this tool works
-- Free access during beta
-- Founding member pricing locked in
-- A tool built for how YOU actually work
+### Phase 4: Expansion
+- ⬜ Additional trades (masonry, stucco, concrete)
+- ⬜ Manufacturer pricing APIs
+- ⬜ CRM integrations
+- ⬜ Mobile app
 
 ---
 
 ## Contact
 
-**Project:** TakeOff Pro AI  
+**Project:** TakeoffReader AI  
+**Website:** takeoffreader.ai  
 **Status:** In Development  
-**Target Launch:** 2025
+**Target Launch:** Q1 2026
 
 ---
 
