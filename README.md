@@ -1,4 +1,4 @@
-# ![TakeoffReader AI](https://raw.githubusercontent.com/nonamedogai/TakeoffReaderAI/main/TakeoffReaderAI_logo.png)
+# ![TakeoffReader AI](https://raw.githubusercontent.com/rasti1608/takeoff-reader-ai/main/logo.png)
 
 # TakeoffReader AI
 ## Intelligent Construction Estimating Platform
