@@ -145,6 +145,8 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
         }
         .modal-image {
             max-width: 98vw;
@@ -152,6 +154,8 @@
             object-fit: contain;
             cursor: grab;
             transition: transform 0.1s;
+            pointer-events: auto;
+            z-index: 1;
         }
         .modal-controls {
             position: fixed;
@@ -159,7 +163,7 @@
             right: 20px;
             display: flex;
             gap: 10px;
-            z-index: 1001;
+            z-index: 9999;
         }
         .modal-btn {
             background: rgba(255,255,255,0.95);
@@ -173,6 +177,8 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 0 3px rgba(0,0,0,0.3);
+            pointer-events: auto;
+            position: relative;
         }
         .modal-btn:hover { background: #f0f0f0; }
         .modal-close {
@@ -181,6 +187,7 @@
             left: 20px;
             background: #e74c3c;
             color: white;
+            z-index: 9999;
         }
         .modal-close:hover { background: #c0392b; }
         .modal-title {
@@ -194,6 +201,8 @@
             border-radius: 5px;
             font-weight: bold;
             font-size: 14px;
+            pointer-events: none;
+            z-index: 1002;
         }
         .zoom-info {
             position: fixed;
@@ -204,6 +213,8 @@
             padding: 6px 12px;
             border-radius: 5px;
             font-size: 12px;
+            pointer-events: none;
+            z-index: 1002;
         }
     </style>
 </head>
@@ -549,12 +560,12 @@
 
 <!-- Image Modal -->
 <div id="imageModal" class="modal" onclick="if(event.target === this) closeModal();">
+    <button class="modal-btn modal-close" onclick="event.stopPropagation(); closeModal();" title="Close">✕</button>
     <div class="modal-controls">
-        <button class="modal-btn" onclick="zoomIn()" title="Zoom In">+</button>
-        <button class="modal-btn" onclick="zoomOut()" title="Zoom Out">−</button>
-        <button class="modal-btn" onclick="resetZoom()" title="Reset">⟲</button>
+        <button class="modal-btn" onclick="event.stopPropagation(); zoomIn()" title="Zoom In">+</button>
+        <button class="modal-btn" onclick="event.stopPropagation(); zoomOut()" title="Zoom Out">−</button>
+        <button class="modal-btn" onclick="event.stopPropagation(); resetZoom()" title="Reset">⟲</button>
     </div>
-    <button class="modal-btn modal-close" onclick="closeModal()" title="Close">✕</button>
     <div class="modal-content">
         <img id="modalImage" class="modal-image" src="" alt="Drawing">
     </div>
