@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEC-CATAQUET RESIDENCE - Takeoff Questions</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .project-info {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .question-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+        .question-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .proposed {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border: 1px solid #bee5eb;
+        }
+        .drawing-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px 5px 5px 0;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .drawing-link:hover { background: #2980b9; }
+        .answer-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        .radio-group label {
+            display: block;
+            padding: 12px 15px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .radio-group label:hover { background: #e9ecef; }
+        .radio-group label.selected {
+            border-color: #3498db;
+            background: #e8f4f8;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        .correction-field {
+            display: none;
+            margin-top: 10px;
+        }
+        .correction-field.visible { display: block; }
+        .submit-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button[type="submit"] {
+            background: #27ae60;
+            color: white;
+            padding: 15px 50px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover { background: #219a52; }
+        .locked-values {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #c3e6cb;
+        }
+        .locked-values h3 { color: #155724; margin-top: 0; }
+        .locked-values ul { margin: 0; padding-left: 20px; }
+        .locked-values li { padding: 3px 0; }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            overflow: hidden;
+        }
+        .modal-image {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            cursor: grab;
+            transition: transform 0.1s;
+        }
+        .modal-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1001;
+        }
+        .modal-btn {
+            background: #fff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .modal-btn:hover { background: #f0f0f0; }
+        .modal-close {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #e74c3c;
+            color: white;
+        }
+        .modal-close:hover { background: #c0392b; }
+        .modal-title {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 10px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .zoom-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🏠 DEC-CATAQUET RESIDENCE</h1>
+<h2 style="color:#666; margin-top:-10px;">Takeoff Verification Questions</h2>
+
+<div class="project-info">
+    <strong>Project:</strong> 502 Twelfth Avenue, Borough of Belmar, NJ<br>
+    <strong>Comm. No.:</strong> 240307<br>
+    <strong>Architect:</strong> M. B. Hearn Architecture, LLC<br><br>
+    <strong>Available Drawings:</strong><br>
+    <span class="drawing-link" onclick="openModal('page_01_A-1.png', 'Sheet A-1: General Notes, Site Plan')">A-1</span>
+    <span class="drawing-link" onclick="openModal('page_02_S-1.png', 'Sheet S-1: Foundation Plan')">S-1</span>
+    <span class="drawing-link" onclick="openModal('page_03_A-2.png', 'Sheet A-2: First Floor Plan')">A-2</span>
+    <span class="drawing-link" onclick="openModal('page_04_A-3.png', 'Sheet A-3: Second Floor / Half Story Plans')">A-3</span>
+    <span class="drawing-link" onclick="openModal('page_05_A-4.png', 'Sheet A-4: Roof Plan')">A-4</span>
+    <span class="drawing-link" onclick="openModal('page_06_A-6.png', 'Sheet A-6: South & East Elevations')">A-6</span>
+    <span class="drawing-link" onclick="openModal('page_07_A-7.png', 'Sheet A-7: North & West Elevations')">A-7</span>
+    <span class="drawing-link" onclick="openModal('page_08_A-8.png', 'Sheet A-8: Sections A & B')">A-8</span>
+    <span class="drawing-link" onclick="openModal('page_09_A-9.png', 'Sheet A-9: Sections C & D')">A-9</span>
+    <span class="drawing-link" onclick="openModal('page_10_A-10.png', 'Sheet A-10: Section E')">A-10</span>
+</div>
+
+<div class="locked-values">
+    <h3>✅ Locked Values (No Input Required)</h3>
+    <p>These values were consistent across all AI analysis runs:</p>
+    <ul>
+        <li><strong>Building Width (E-W):</strong> 31'-0"</li>
+        <li><strong>Building Length (N-S):</strong> 50'-0"</li>
+        <li><strong>Footprint Area:</strong> 1,550 SF</li>
+        <li><strong>Front Porch Area:</strong> 122 SF</li>
+        <li><strong>Main Roof Pitch:</strong> 9:12</li>
+        <li><strong>Porch Roof Pitch:</strong> 6:12</li>
+        <li><strong>Garage Doors:</strong> 0 (no attached garage)</li>
+    </ul>
+</div>
+
+<form action="https://formsubmit.co/rtoscak@nonamedog.ai" method="POST">
+    <input type="hidden" name="_subject" value="TakeOff Reader - Mark's Answers - DEC-CATAQUET">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+
+    <!-- Question 1 -->
+    <div class="question-card">
+        <h3>Question 1: Ridge Direction / Gable Orientation</h3>
+        <p>From Roof Plan, the main ridge appears to run EAST-WEST (parallel to the 50'-0" building length), with primary gables on the EAST and WEST (side) elevations.</p>
+        <p><span class="drawing-link" onclick="openModal('page_05_A-4.png', 'Sheet A-4: Roof Plan')">📄 View Sheet A-4</span></p>
+        <div class="proposed">
+            <strong>Proposed:</strong> Ridge runs E-W, gables on East/West sides
+        </div>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q1_correction').classList.remove('visible');">
+                    <input type="radio" name="Q1_Ridge_Gables" value="CONFIRM: Ridge E-W, Gables East/West" required> 
+                    <span>✓ CONFIRM</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q1_correction').classList.add('visible');">
+                    <input type="radio" name="Q1_Ridge_Gables" value="CORRECT - see details">
+                    <span>✎ CORRECT (specify below)</span>
+                </label>
+            </div>
+            <div id="q1_correction" class="correction-field">
+                <input type="text" name="Q1_Correction" placeholder="Ridge runs _______, gables on _______">
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question-card">
+        <h3>Question 2: Wall Height (Grade to Main Soffit)</h3>
+        <p>From Section E (Sheet A-10), measuring from proposed grade to the main soffit/eave line.</p>
+        <p><span class="drawing-link" onclick="openModal('page_10_A-10.png', 'Sheet A-10: Section E')">📄 View Sheet A-10</span></p>
+        <div class="proposed">
+            <strong>Proposed:</strong> 24'-0"
+        </div>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q2_correction').classList.remove('visible');">
+                    <input type="radio" name="Q2_Wall_Height" value="CONFIRM: 24'-0" required>
+                    <span>✓ CONFIRM (24'-0")</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q2_correction').classList.add('visible');">
+                    <input type="radio" name="Q2_Wall_Height" value="CORRECT - see details">
+                    <span>✎ CORRECT (specify below)</span>
+                </label>
+            </div>
+            <div id="q2_correction" class="correction-field">
+                <input type="text" name="Q2_Correction" placeholder="Correct wall height: ___'-___&quot;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question-card">
+        <h3>Question 3: Roof Overhang</h3>
+        <p>Roof overhang is NOT dimensioned on drawings. Standard assumption applied.</p>
+        <p>
+            <span class="drawing-link" onclick="openModal('page_05_A-4.png', 'Sheet A-4: Roof Plan')">📄 View A-4</span>
+            <span class="drawing-link" onclick="openModal('page_06_A-6.png', 'Sheet A-6: Elevations')">📄 View A-6</span>
+        </p>
+        <div class="proposed">
+            <strong>Proposed:</strong> 1'-6" (assumed)
+        </div>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q3_correction').classList.remove('visible');">
+                    <input type="radio" name="Q3_Roof_Overhang" value="CONFIRM: 1'-6" required>
+                    <span>✓ CONFIRM (1'-6")</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q3_correction').classList.add('visible');">
+                    <input type="radio" name="Q3_Roof_Overhang" value="CORRECT - see details">
+                    <span>✎ CORRECT (specify below)</span>
+                </label>
+            </div>
+            <div id="q3_correction" class="correction-field">
+                <input type="text" name="Q3_Correction" placeholder="Correct overhang: ___'-___&quot;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question-card">
+        <h3>Question 4: Window Count - South (Front) Elevation</h3>
+        <p>Count includes all floors. Entry sidelites/transom counted as part of door unit.</p>
+        <p><span class="drawing-link" onclick="openModal('page_06_A-6.png', 'Sheet A-6: South & East Elevations')">📄 View Sheet A-6</span></p>
+        <div class="proposed">
+            <strong>Proposed:</strong> 10 windows
+        </div>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q4_correction').classList.remove('visible');">
+                    <input type="radio" name="Q4_Windows_South" value="CONFIRM: 10" required>
+                    <span>✓ CONFIRM (10 windows)</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q4_correction').classList.add('visible');">
+                    <input type="radio" name="Q4_Windows_South" value="CORRECT - see details">
+                    <span>✎ CORRECT (specify below)</span>
+                </label>
+            </div>
+            <div id="q4_correction" class="correction-field">
+                <input type="number" name="Q4_Correction" placeholder="Correct count: ___">
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question-card">
+        <h3>Question 5: Window Count - North (Rear) Elevation</h3>
+        <p>Count includes basement gliders and all upper floors.</p>
+        <p><span class="drawing-link" onclick="openModal('page_07_A-7.png', 'Sheet A-7: North & West Elevations')">📄 View Sheet A-7</span></p>
+        <div class="proposed">
+            <strong>Proposed:</strong> 12 windows
+        </div>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q5_correction').classList.remove('visible');">
+                    <input type="radio" name="Q5_Windows_North" value="CONFIRM: 12" required>
+                    <span>✓ CONFIRM (12 windows)</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q5_correction').classList.add('visible');">
+                    <input type="radio" name="Q5_Windows_North" value="CORRECT - see details">
+                    <span>✎ CORRECT (specify below)</span>
+                </label>
+            </div>
+            <div id="q5_correction" class="correction-field">
+                <input type="number" name="Q5_Correction" placeholder="Correct count: ___">
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 6 -->
+    <div class="question-card">
+        <h3>Question 6: Window Count - East (Side) Elevation</h3>
+        <p>Count includes basement glider and stair tower windows.</p>
+        <p><span class="drawing-link" onclick="openModal('page_06_A-6.png', 'Sheet A-6: South & East Elevations')">📄 View Sheet A-6</span></p>
+        <div class="proposed">
+            <strong>Proposed:</strong> 12 windows
+        </div>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q6_correction').classList.remove('visible');">
+                    <input type="radio" name="Q6_Windows_East" value="CONFIRM: 12" required>
+                    <span>✓ CONFIRM (12 windows)</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q6_correction').classList.add('visible');">
+                    <input type="radio" name="Q6_Windows_East" value="CORRECT - see details">
+                    <span>✎ CORRECT (specify below)</span>
+                </label>
+            </div>
+            <div id="q6_correction" class="correction-field">
+                <input type="number" name="Q6_Correction" placeholder="Correct count: ___">
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 7 -->
+    <div class="question-card">
+        <h3>Question 7: Window Count - West (Side) Elevation</h3>
+        <p>Count includes basement glider.</p>
+        <p><span class="drawing-link" onclick="openModal('page_07_A-7.png', 'Sheet A-7: North & West Elevations')">📄 View Sheet A-7</span></p>
+        <div class="proposed">
+            <strong>Proposed:</strong> 11 windows
+        </div>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q7_correction').classList.remove('visible');">
+                    <input type="radio" name="Q7_Windows_West" value="CONFIRM: 11" required>
+                    <span>✓ CONFIRM (11 windows)</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q7_correction').classList.add('visible');">
+                    <input type="radio" name="Q7_Windows_West" value="CORRECT - see details">
+                    <span>✎ CORRECT (specify below)</span>
+                </label>
+            </div>
+            <div id="q7_correction" class="correction-field">
+                <input type="number" name="Q7_Correction" placeholder="Correct count: ___">
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 8 -->
+    <div class="question-card">
+        <h3>Question 8: Exterior Door Count</h3>
+        <p>Doors identified:</p>
+        <ol>
+            <li>Front Entry Door (with sidelites and transom) - South</li>
+            <li>Basement Exterior Door - North (below deck)</li>
+            <li>Rear Deck Door/Slider - North, first floor</li>
+            <li>Second Floor Balcony Door - West</li>
+        </ol>
+        <p>
+            <span class="drawing-link" onclick="openModal('page_06_A-6.png', 'Sheet A-6')">📄 A-6</span>
+            <span class="drawing-link" onclick="openModal('page_07_A-7.png', 'Sheet A-7')">📄 A-7</span>
+        </p>
+        <div class="proposed">
+            <strong>Proposed:</strong> 4 doors
+        </div>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q8_correction').classList.remove('visible');">
+                    <input type="radio" name="Q8_Doors" value="CONFIRM: 4" required>
+                    <span>✓ CONFIRM (4 doors)</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q8_correction').classList.add('visible');">
+                    <input type="radio" name="Q8_Doors" value="CORRECT - see details">
+                    <span>✎ CORRECT (specify below)</span>
+                </label>
+            </div>
+            <div id="q8_correction" class="correction-field">
+                <input type="text" name="Q8_Correction" placeholder="Correct count and list which doors: ___">
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 9 -->
+    <div class="question-card">
+        <h3>Question 9: Stone Veneer Height from Grade</h3>
+        <p>Stone veneer appears on exposed foundation/basement walls from grade to approximately the first floor line.</p>
+        <p>
+            <span class="drawing-link" onclick="openModal('page_06_A-6.png', 'Sheet A-6')">📄 A-6</span>
+            <span class="drawing-link" onclick="openModal('page_07_A-7.png', 'Sheet A-7')">📄 A-7</span>
+        </p>
+        <div class="proposed">
+            <strong>Proposed:</strong> 5'-0" (grade to first floor line)
+        </div>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q9_correction').classList.remove('visible');">
+                    <input type="radio" name="Q9_Stone_Height" value="CONFIRM: 5'-0" required>
+                    <span>✓ CONFIRM (5'-0")</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q9_correction').classList.add('visible');">
+                    <input type="radio" name="Q9_Stone_Height" value="CORRECT - see details">
+                    <span>✎ CORRECT (specify below)</span>
+                </label>
+            </div>
+            <div id="q9_correction" class="correction-field">
+                <input type="text" name="Q9_Correction" placeholder="Correct height: ___'-___&quot;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 10 -->
+    <div class="question-card">
+        <h3>Question 10: Stone Veneer - Which Elevations?</h3>
+        <p>Which sides of the building have stone veneer on the foundation zone?</p>
+        <p>
+            <span class="drawing-link" onclick="openModal('page_06_A-6.png', 'Sheet A-6')">📄 A-6</span>
+            <span class="drawing-link" onclick="openModal('page_07_A-7.png', 'Sheet A-7')">📄 A-7</span>
+        </p>
+        <div class="proposed">
+            <strong>Proposed:</strong> All four elevations (Front, Rear, East, West)
+        </div>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q10_correction').classList.remove('visible');">
+                    <input type="radio" name="Q10_Stone_Location" value="CONFIRM: All 4 elevations" required>
+                    <span>✓ CONFIRM (All 4 elevations)</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q10_correction').classList.add('visible');">
+                    <input type="radio" name="Q10_Stone_Location" value="CORRECT - see details">
+                    <span>✎ CORRECT (specify below)</span>
+                </label>
+            </div>
+            <div id="q10_correction" class="correction-field">
+                <input type="text" name="Q10_Correction" placeholder="Stone on _______ elevations only">
+            </div>
+        </div>
+    </div>
+
+    <!-- Question 11 -->
+    <div class="question-card">
+        <h3>Question 11: Stucco Area</h3>
+        <p>Is there a separate STUCCO zone on the foundation, or is it all stone veneer?</p>
+        <p>
+            <span class="drawing-link" onclick="openModal('page_06_A-6.png', 'Sheet A-6')">📄 A-6</span>
+            <span class="drawing-link" onclick="openModal('page_07_A-7.png', 'Sheet A-7')">📄 A-7</span>
+        </p>
+        <div class="answer-section">
+            <div class="radio-group">
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q11_correction').classList.remove('visible');">
+                    <input type="radio" name="Q11_Stucco" value="NO - All foundation is stone veneer" required>
+                    <span>NO - All foundation is stone veneer</span>
+                </label>
+                <label onclick="this.classList.add('selected'); this.parentNode.querySelectorAll('label').forEach(l => l !== this && l.classList.remove('selected')); document.getElementById('q11_correction').classList.add('visible');">
+                    <input type="radio" name="Q11_Stucco" value="YES - see details">
+                    <span>YES - There is stucco (specify below)</span>
+                </label>
+            </div>
+            <div id="q11_correction" class="correction-field">
+                <input type="text" name="Q11_Correction" placeholder="Stucco location: _______">
+            </div>
+        </div>
+    </div>
+
+    <div class="submit-section">
+        <p style="margin-bottom:20px; color:#666;">Please review your answers above, then submit.</p>
+        <button type="submit">📤 Submit Answers</button>
+    </div>
+</form>
+
+<!-- Image Modal -->
+<div id="imageModal" class="modal" onclick="if(event.target === this) closeModal();">
+    <div class="modal-controls">
+        <button class="modal-btn" onclick="zoomIn()" title="Zoom In">+</button>
+        <button class="modal-btn" onclick="zoomOut()" title="Zoom Out">−</button>
+        <button class="modal-btn" onclick="resetZoom()" title="Reset">⟲</button>
+    </div>
+    <button class="modal-btn modal-close" onclick="closeModal()" title="Close">✕</button>
+    <div class="modal-content">
+        <img id="modalImage" class="modal-image" src="" alt="Drawing">
+    </div>
+    <div id="modalTitle" class="modal-title"></div>
+    <div id="zoomInfo" class="zoom-info">100%</div>
+</div>
+
+<script>
+    const baseUrl = 'https://raw.githubusercontent.com/rasti1608/takeoff-reader-ai/main/TakeOff_Tests/Mark_Interaction/300dpi/';
+    let currentZoom = 1;
+    let isDragging = false;
+    let startX, startY, translateX = 0, translateY = 0;
+    
+    function openModal(imageName, title) {
+        const modal = document.getElementById('imageModal');
+        const img = document.getElementById('modalImage');
+        const titleEl = document.getElementById('modalTitle');
+        
+        img.src = baseUrl + imageName;
+        titleEl.textContent = title;
+        modal.classList.add('active');
+        resetZoom();
+        
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+        document.getElementById('imageModal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    
+    function zoomIn() {
+        currentZoom = Math.min(currentZoom + 0.25, 5);
+        applyZoom();
+    }
+    
+    function zoomOut() {
+        currentZoom = Math.max(currentZoom - 0.25, 0.5);
+        applyZoom();
+    }
+    
+    function resetZoom() {
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+        applyZoom();
+    }
+    
+    function applyZoom() {
+        const img = document.getElementById('modalImage');
+        img.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
+        document.getElementById('zoomInfo').textContent = Math.round(currentZoom * 100) + '%';
+    }
+    
+    // Drag to pan
+    const modalImage = document.getElementById('modalImage');
+    
+    modalImage.addEventListener('mousedown', (e) => {
+        if (currentZoom > 1) {
+            isDragging = true;
+            startX = e.clientX - translateX;
+            startY = e.clientY - translateY;
+            modalImage.style.cursor = 'grabbing';
+        }
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            translateX = e.clientX - startX;
+            translateY = e.clientY - startY;
+            applyZoom();
+        }
+    });
+    
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        modalImage.style.cursor = 'grab';
+    });
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        if (document.getElementById('imageModal').classList.contains('active')) {
+            if (e.key === 'Escape') closeModal();
+            if (e.key === '+' || e.key === '=') zoomIn();
+            if (e.key === '-') zoomOut();
+            if (e.key === '0') resetZoom();
+        }
+    });
+    
+    // Mouse wheel zoom
+    document.getElementById('modalImage').addEventListener('wheel', (e) => {
+        e.preventDefault();
+        if (e.deltaY < 0) zoomIn();
+        else zoomOut();
+    });
+</script>
+
+</body>
+</html>
