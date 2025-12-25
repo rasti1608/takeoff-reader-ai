@@ -614,7 +614,7 @@
     </div>
 
     <script>
-        const baseUrl = 'https://raw.githubusercontent.com/rasti1608/takeoff-reader-ai/main/TakeOff_Tests/Mark_Interaction/300dpi/';
+        const baseUrl = 'https://github.com/rasti1608/takeoff-reader-ai/blob/main/TakeOff_Tests/Mark_Interaction/300dpi/';
         let currentZoom = 1;
         let isDragging = false;
         let startX, startY, translateX = 0, translateY = 0;
@@ -624,7 +624,7 @@
             const img = document.getElementById('modalImage');
             const titleEl = document.getElementById('modalTitle');
 
-            img.src = baseUrl + imageName;
+            img.src = baseUrl + imageName + '?raw=true';
             titleEl.textContent = title;
             modal.classList.add('active');
             resetZoom();
